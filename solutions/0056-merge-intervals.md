@@ -1,58 +1,28 @@
-import java.util.*;
+# 56. Merge Intervals
 
-class ListNode {
-    int val;
-    ListNode next;
+## M1. Sort and scan
 
-    ListNode() {
-    }
-
-    ListNode(int val) {
-        this.val = val;
-    }
-
-    ListNode(int val, ListNode next) {
-        this.val = val;
-        this.next = next;
-    }
-}
-
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-
-    TreeNode() {
-    }
-
-    TreeNode(int val) {
-        this.val = val;
-    }
-
-    TreeNode(int val, TreeNode left, TreeNode right) {
-        this.val = val;
-        this.left = left;
-        this.right = right;
-    }
-}
-
+```java
 class Solution {
-    static Scanner in = new Scanner(System.in);
-    static int[] dx = {1, -1, 0, 0};
-    static int[] dy = {0, 0, 1, -1};
-
-    public static void main(String[] args) {
-        int n = in.nextInt();
-        int[][] nums = new int[n][2];
-        for (int i = 0; i < n; i++) {
-            nums[i][0] = in.nextInt();
-            nums[i][1] = in.nextInt();
-        }
-        Solution solution = new Solution();
-        System.out.println(Arrays.deepToString(solution.merge(nums)));
-    }
-
     public int[][] merge(int[][] intervals) {
+        Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
+        LinkedList<int[]> merged = new LinkedList<>();
+        for(int[] interval : intervals){
+            if (merged.isEmpty() || merged.getLast()[1] < interval[0]) {
+                merged.add(interval);
+            } else {
+                merged.getLast()[1] = Math.max(merged.getLast()[1], interval[1]);
+            }
+        }
+        return merged.toArray(new int[merged.size()][]);
+    }
+}
+```
+
+## M2. Prefix sum
+
+```java
+public int[][] merge(int[][] intervals) {
 
         final int MAX_SIZE = 10001;
 
@@ -110,4 +80,4 @@ class Solution {
         // return the answer without the empty int[]
         return Arrays.copyOf(result, counter);
     }
-}
+```
