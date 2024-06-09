@@ -28,3 +28,4 @@ out/
 leetcode.iml
 .idea/
 test-env/
+.vscode/
