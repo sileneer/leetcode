@@ -28,7 +28,7 @@ out/
 .idea/
 .venv/
 .vscode/
-Solution.java
-template.c
-template.cpp
-template.py
+# Solution.java
+# template.c
+# template.cpp
+# template.py
